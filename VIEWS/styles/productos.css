@@ -1,0 +1,8 @@
+.nameProduct:hover{
+    color: rgb(16, 124, 148);
+    cursor: pointer;
+}
+
+.pro-card:hover{
+    background-color: rgba(144, 215, 224, 0.722);
+}

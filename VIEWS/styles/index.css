@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+body{
+    height: 90vh;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(192, 208, 233);
+    background-image: url("../assets/imagenes/back-main-image.jpg");
+    background-size: cover;
+    font-family: 'Nunito', sans-serif;
+}
+

@@ -1,0 +1,14 @@
+.menu-link > a{
+    transition: all 0.2s ease;
+    
+}
+
+.menu-link > a:hover{
+    border-bottom: 2px solid rgb(180, 4, 66);
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.divider{
+    border: 2px solid rgb(31, 89, 118)
+}

@@ -41,3 +41,35 @@ $(document).ready(function mostrarProductos(){
         }
     });
 });
+
+function añadirCliente(){
+
+    var nuevoCliente = [];
+    let nombreCliente = document.getElementById("nombreCliente").value;
+    let dirCliente = document.getElementById("dirCliente").value;
+    let telCliente = document.getElementById("telCliente").value;
+    let emailCliente = document.getElementById("emailCliente").value;
+
+    if(nombreCliente == ""){
+        alert('Por favor ingresa un nombre para el nuevo cliente');
+    }else{
+        nuevoProducto.push(referencia,parseInt(precioVen),parseInt(precioCom),parseInt(minCom),codigoProducto,categoria,descripcion);
+        
+        var query = {'array': JSON.stringify(nuevoProducto)};
+
+        $.ajax({
+            url: '../../CONTROLLER/php/añadirProducto.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                q : query['array']
+            },
+            success: function(data){
+                alert(data);
+                location.reload();
+            },
+            dataType: 'text'
+        });
+    }
+
+}

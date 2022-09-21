@@ -79,7 +79,7 @@ function añadirProducto(){
     let descripcion = document.getElementById("descripcion").value;
 
     if(referencia == "" || precioVen == "" || precioCom == "" || minCom == "" || codigoProducto == "" || categoria == ""){
-        alert('Por favor completa los datos de la venta');
+        alert('Por favor completa los datos del producto');
     }else{
         nuevoProducto.push(referencia,parseInt(precioVen),parseInt(precioCom),parseInt(minCom),codigoProducto,categoria,descripcion);
         

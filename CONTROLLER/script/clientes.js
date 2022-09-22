@@ -1,4 +1,4 @@
-$(document).ready(function mostrarProductos(){
+$(document).ready(function mostrarClientes(){
     $.ajax({
         url: '../../CONTROLLER/php/mostrarClientes.php',
         method: 'POST',
@@ -40,36 +40,24 @@ $(document).ready(function mostrarProductos(){
             });
         }
     });
-});
 
-function añadirCliente(){
-
-    var nuevoCliente = [];
-    let nombreCliente = document.getElementById("nombreCliente").value;
-    let dirCliente = document.getElementById("dirCliente").value;
-    let telCliente = document.getElementById("telCliente").value;
-    let emailCliente = document.getElementById("emailCliente").value;
-
-    if(nombreCliente == ""){
-        alert('Por favor ingresa un nombre para el nuevo cliente');
-    }else{
-        nuevoProducto.push(referencia,parseInt(precioVen),parseInt(precioCom),parseInt(minCom),codigoProducto,categoria,descripcion);
-        
-        var query = {'array': JSON.stringify(nuevoProducto)};
-
+    $(document).on("click", ".nameCliente", function (){
+        var query = $(this).text();
         $.ajax({
-            url: '../../CONTROLLER/php/añadirProducto.php',
+            url: '../../CONTROLLER/php/mostrarProductos.php',
             method: 'POST',
-            dataType: 'json',
             data: {
-                q : query['array']
+                function: 'mostrarInfoProducto',
+                q : query
             },
             success: function(data){
-                alert(data);
-                location.reload();
+                $("#cont-info-producto").html(data);
             },
             dataType: 'text'
         });
-    }
+        
+    }); 
 
-}
+});
+
+

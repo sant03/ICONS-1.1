@@ -136,7 +136,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Acceda a su perfil</h6>
                 </li>
             </ul>
-            <a href="usuarios.html" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Usuarios</a>
+            <a href="usuarios.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Usuarios</a>
         </article>
         <article class="col-lg-3 col-sm-5 bg-light p-4 m-2 mt-5 me-4 rounded text-center shadow">
             <img src="../assets/imagenes/venta-img-link.png" alt="" class="mb-5" style="width:100px">
@@ -151,7 +151,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Editar ventas</h6>
                 </li>
             </ul>
-            <button class="btn btn-lg btn-primary rounded mt-5" style="width:100% ;">Ventas</button>
+            <a href="ventas.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Ventas</a>
         </article>
         <article class="col-lg-3 col-sm-5 bg-light p-4 m-2 mt-5 me-4 rounded text-center shadow">
             <img src="../assets/imagenes/compra-img-link.png" alt="" class="mb-5" style="width:100px">
@@ -169,7 +169,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Ingresar Productos</h6>
                 </li>
             </ul>
-            <button class="btn btn-lg btn-primary rounded mt-4" style="width:100% ;">Compras</button>
+            <a href="compras.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Compras</a>
         </article>
         <article class="col-lg-3 col-sm-5 bg-light p-4 m-2 mt-5 me-4 rounded text-center shadow">
             <img src="../assets/imagenes/producto-img-link.png" alt="" class="mb-5" style="width:100px">
@@ -184,7 +184,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Visualizar stock de productos</h6>
                 </li>
             </ul>
-            <button class="btn btn-lg btn-primary rounded mt-4" style="width:100% ;">Productos</button>
+            <a href="productos.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Productos</a>
         </article>
         <article class="col-lg-3 col-sm-5 bg-light p-4 m-2 mt-5 me-4 rounded text-center shadow">
             <img src="../assets/imagenes/clientes-img-link.png" alt="" class="mb-5" style="width:100px">
@@ -199,7 +199,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Añada informacion relevante</h6>
                 </li>
             </ul>
-            <button class="btn btn-lg btn-primary rounded mt-4" style="width:100% ;">Clientes y Prov</button>
+            <a href="clientes.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Clientes y Prov</a>
         </article>
         <article class="col-lg-3 col-sm-5 bg-light p-4 m-2 mt-5 me-4 rounded text-center shadow">
             <img src="../assets/imagenes/orden-img-link.png" alt="" class="mb-5" style="width:100px">
@@ -214,7 +214,7 @@ $row = $resultado->fetch_assoc();
                     <h6>Exporte y comparta ordenes</h6>
                 </li>
             </ul>
-            <button class="btn btn-lg btn-primary rounded mt-4" style="width:100% ;">Orden de Compra</button>
+            <a href="ordenes.php" class="btn btn-lg btn-primary rounded mt-5 " style="width:100% ;">Ordenes</a>
         </article>
     </section>
     

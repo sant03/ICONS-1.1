@@ -11,6 +11,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/clientes.css">
     <link rel="icon" href="../assets/imagenes/icon.png">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
@@ -47,7 +48,7 @@
 
         <!--Header -->
         <div class="col-8 m-auto">
-            <h1>Clientes | <a href="proveedores.html" class="text-decoration-none text-success">Proveedores</a> </h1>
+            <h1>Clientes | <a href="proveedores.php" class="text-decoration-none text-success">Proveedores</a> </h1>
         </div>
         <div class="col-1">
             <img src="../assets/imagenes/image-11.svg" alt="" style="width:100px">
@@ -101,8 +102,8 @@
                 <button class="btn btn-primary">Buscar</button>
             </form>
             <div class="col-2">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirProdModal"> Añadir cliente</button>
-                <div class="modal fade" id="añadirProdModal">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#añadirCliModal"> Añadir cliente</button>
+                <div class="modal fade" id="añadirCliModal">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                   
@@ -118,18 +119,18 @@
                         <div class="modal-body">
                           <form action="">
                             <label for="" class="form-label fw-bold">Nombre </label>
-                            <input type="text" id="nombrecliente" class="form-control mb-2">
+                            <input type="text" id="nombreCliente" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Direccion </label>
-                            <input type="number" id="dirCliente" class="form-control mb-2">
+                            <input type="text" id="dirCliente" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Telefono </label>
                             <input type="number" id="telCliente" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Email </label>
-                            <input type="number" id="emailCliente" class="form-control mb-2">
+                            <input type="email" id="emailCliente" class="form-control mb-2">
                           </form>
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-success" onclick="añadirCliente()">Añadir cliente</button>
+                          <button type="button" class="btn btn-success" id="añadirCliente" >Añadir cliente</button>
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -208,60 +209,10 @@
                 </div>
             </div>
             
-            <!--Card Product-->
+            <!--Card Client-->
             <div class="col-3 m-auto text-center">
-                <div class="card shadow mb-3">
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <button class="btn btn-outline-none" data-bs-toggle="modal" data-bs-target="#editarCliModal"><img src="../assets/imagenes/editar.png" alt="" style="width: 30px;"></i></button>
-                            <div class="modal fade text-start" id="editarCliModal">
-                                <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                            
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                    <div>
-                                        <h4 class="modal-title">Editar informacion de cliente</h4>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                            
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                    <form action="">
-                                        <label for="" class="form-label fw-bold">Nombre: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Direccion: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Telefono: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Email: </label>
-                                        <input type="number" class="form-control mb-2">
-                                    </form>
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-success">Guardar</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-oultine-none"><img src="../assets/imagenes/basura.png" alt="" style="width:30px;"></button>
-                        </div>
-                        
-                        <div class="mb-5">
-                            <img src="../assets/imagenes/user-icon.png" alt="" class="rounded rounded-circle img-thumbnail" style="width:160px;">
-                        </div>
-    
-                        <h6 class="text-secondary mb-4">ID: <span class="p-2 bg-light border rounded text-dark ms-3">1234578654</span></h6>
-                        <h6 class="text-secondary mb-4">Direccion: <span class="p-2 bg-light border rounded text-dark ms-3">Calle 83#25a 183</span></h6>
-                        <h6 class="text-secondary mb-4">Telefono: <span class="p-2 bg-light border rounded text-dark ms-3">3042617834</span></h6>
-                        <h6 class="text-secondary mb-4">Email: <span class="p-2 bg-light border rounded text-dark ms-3">nombre@gmail.com</span></h6>
-                    </div>
-                    <div class="card footer bg-light text-center p-2">
-                        <h3 class="text-success">Nombre</h3>
-                    </div>
+                <div class="card shadow mb-3" id="cont-info-cliente">
+                    
                 </div>
             </div>
         </div>
@@ -301,9 +252,54 @@
                     });
                 }
             });
+
+            //Funcion añadir un cliente
+            $(document).on("click", "#añadirCliente", function (){
+                var nuevoCliente = [];
+                let nombreCliente = document.getElementById("nombreCliente").value;
+                let dirCliente = document.getElementById("dirCliente").value;
+                let telCliente = document.getElementById("telCliente").value;
+                let emailCliente = document.getElementById("emailCliente").value;
+
+                if(nombreCliente == ""){
+                    alert('Por favor ingresa un nombre para el nuevo cliente');
+                }else{
+                    nuevoCliente.push(nombreCliente,dirCliente,parseInt(telCliente),emailCliente);
+                    
+                    var query = {'array': JSON.stringify(nuevoCliente)};
+
+                    $.ajax({
+                        url: '../../CONTROLLER/php/añadirCliente.php',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            q : query['array']
+                        },
+                        success: function(data){
+                            alert(data);
+                            location.reload();
+                        },
+                        dataType: 'text'
+                    });
+                }
+            });
+
+            $(document).on("click", ".nameCliente", function (){
+                var query = $(this).text();
+                $.ajax({
+                    url: '../../CONTROLLER/php/mostrarClientes.php',
+                    method: 'POST',
+                    data: {
+                        function: 'mostrarInfoCliente',
+                        q : query
+                    },
+                    success: function(data){
+                        $("#cont-info-cliente").html(data);
+                    },
+                    dataType: 'text'
+                });
+            }); 
         });
-
-
     </script>
 </body>
 </html>

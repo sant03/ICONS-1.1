@@ -44,7 +44,7 @@
 
         <!--Header -->
         <div class="col-8 m-auto">
-            <h1><a href="ordenes.html"><i class="bi bi-arrow-left-circle me-2"></i></a> Orden de compra</h1>
+            <h1><a href="ordenes.php"><i class="bi bi-arrow-left-circle me-2"></i></a> Orden de compra</h1>
             <p class="fw-bold">Crear nueva orden de compra</p>
         </div>
         <div class="col-1">

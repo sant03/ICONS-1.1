@@ -4,22 +4,22 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
     $function = $_POST['function'];
     
     switch($function) {
-        case 'mostrarClientes' : function mostrarClientes(){
+        case 'mostrarProveedores' : function mostrarProveedores(){
             
             include ('config.php');
 
-            $consulta = "SELECT cli_nombre FROM cliente ORDER BY cli_nombre ASC";
+            $consulta = "SELECT prov_nom FROM proveedor ORDER BY prov_nom ASC";
             
             $resultado = mysqli_query($conex,$consulta);
 
             if($resultado){
                 while($row = $resultado->fetch_array()){
-                    $nameCliente = $row['cli_nombre'];
+                    $nameProveedor = $row['prov_nom'];
                     echo "
-                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 cli-card'>
+                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 prov-card'>
                             <div class='card-body d-flex ps-2'>
                                 <img src='../assets/imagenes/user-icon.png' style='width:60px'>
-                                <h4 class='align-self-center ms-4 nameCliente'>$nameCliente</h4>
+                                <h4 class='align-self-center ms-4 nameProveedor'>$nameProveedor</h4>
                             </div>
                         </div>";
     
@@ -28,26 +28,26 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                 echo "Resultados no encontrados";
             }
         }
-        mostrarClientes();
+        mostrarProveedores();
         break;
-        case 'autSearchCli' : function autSearchCli(){
+        case 'autSearchProv' : function autSearchProv(){
 
             include ('config.php');
 
             $q= mysqli_real_escape_string($conex, $_POST['q']);
 
-            $consulta = "SELECT cli_id, cli_nombre FROM cliente WHERE cli_id='$q' OR cli_nombre LIKE '".$q."%'";
+            $consulta = "SELECT prov_id, prov_nom FROM proveedor WHERE prov_id='$q' OR prov_nom LIKE '".$q."%'";
             
             $resultado = mysqli_query($conex,$consulta);
 
             if($resultado){
                 while($row = $resultado->fetch_array()){
-                    $nameCliente = $row['cli_nombre'];
+                    $nameProveedor = $row['prov_nom'];
                     echo "
-                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 cli-card'>
+                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 prov-card'>
                             <div class='card-body d-flex ps-2'>
                                 <img src='../assets/imagenes/user-icon.png' style='width:60px'>
-                                <h4 class='align-self-center ms-4 nameCliente'>$nameCliente</h4>
+                                <h4 class='align-self-center ms-4 nameProveedor'>$nameProveedor</h4>
                             </div>
                         </div>";
     
@@ -56,25 +56,25 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                 echo "Resultados no encontrados";
             }
         }
-        autSearchCli();
+        autSearchProv();
         break;
-        case 'autSearchCliEmpty' : function autSearchCliEmpty(){
+        case 'autSearchProvEmpty' : function autSearchProvEmpty(){
             include ('config.php');
 
             $q= mysqli_real_escape_string($conex, $_POST['q']);
 
-            $consulta = "SELECT cli_nombre FROM cliente ORDER BY cli_nombre ASC";
+            $consulta = "SELECT prov_nom FROM proveedor ORDER BY prov_nom ASC";
             
             $resultado = mysqli_query($conex,$consulta);
 
             if($resultado){
                 while($row = $resultado->fetch_array()){
-                    $nameCliente = $row['cli_nombre'];
+                    $nameProveedor = $row['prov_nom'];
                     echo "
-                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 cli-card'>
+                        <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 prov-card'>
                             <div class='card-body d-flex ps-2'>
                                 <img src='../assets/imagenes/user-icon.png' style='width:60px'>
-                                <h4 class='align-self-center ms-4 nameCliente'>$nameCliente</h4>
+                                <h4 class='align-self-center ms-4 nameProveedor'>$nameProveedor</h4>
                             </div>
                         </div>";
     
@@ -82,24 +82,24 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
             }else{
                 echo "Resultados no encontrados";
             }
-        }autSearchCliEmpty();
+        }autSearchProvEmpty();
         break;
         case 'mostrarRegistrosAZ' : function mostrarRegistrosAZ(){
             include ('config.php');
 
-                $consulta = "SELECT cli_nombre FROM cliente ORDER BY cli_nombre ASC";
+                $consulta = "SELECT prov_nom FROM proveedor ORDER BY prov_nom ASC";
                 
 
                 $resultado = mysqli_query($conex,$consulta);
 
                 if($resultado){
                     while($row = $resultado->fetch_array()){
-                        $nameCliente = $row['cli_nombre'];
+                        $nameProveedor = $row['prov_nom'];
                         echo "
-                            <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 cli-card'>
+                            <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 prov-card'>
                                 <div class='card-body d-flex ps-2'>
                                     <img src='../assets/imagenes/user-icon.png' style='width:60px'>
-                                    <h4 class='align-self-center ms-4 nameCliente'>$nameCliente</h4>
+                                    <h4 class='align-self-center ms-4 nameProveedor'>$nameProveedor</h4>
                                 </div>
                             </div>";
         
@@ -112,19 +112,19 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
         case 'mostrarRegistrosZA' : function mostrarRegistrosZA(){
             include ('config.php');
 
-                $consulta = "SELECT cli_nombre FROM cliente ORDER BY cli_nombre DESC";
+                $consulta = "SELECT prov_nom FROM proveedor ORDER BY prov_nom DESC";
                 
 
                 $resultado = mysqli_query($conex,$consulta);
 
                 if($resultado){
                     while($row = $resultado->fetch_array()){
-                        $nameCliente = $row['cli_nombre'];
+                        $nameProveedor = $row['prov_nom'];
                         echo "
-                            <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 cli-card'>
+                            <div class='col-lg-7 col-sm-5 card shadow text-center me-4 mb-3 prov-card'>
                                 <div class='card-body d-flex ps-2'>
                                     <img src='../assets/imagenes/user-icon.png' style='width:60px'>
-                                    <h4 class='align-self-center ms-4 nameCliente'>$nameCliente</h4>
+                                    <h4 class='align-self-center ms-4 nameProveedor'>$nameProveedor</h4>
                                 </div>
                             </div>";
         
@@ -134,31 +134,31 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                 }
         }
         mostrarRegistrosZA();break;
-        case 'mostrarInfoCliente': function mostrarInfoCliente(){
+        case 'mostrarInfoProveedor': function mostrarInfoProveedor(){
 
             include('config.php');
 
-            $cliente = $_POST['q'];
+            $proveedor = $_POST['q'];
 
-            $consulta = "SELECT cli_id, cli_nombre, cli_telefono, cli_direccion, cli_email FROM cliente
-            WHERE cli_nombre = '$cliente'";
+            $consulta = "SELECT prov_id, prov_nom, prov_tel, prov_dir, prov_email FROM proveedor
+            WHERE prov_nom = '$proveedor'";
 
             $resultado = mysqli_query($conex,$consulta);
 
             if($resultado){
                 while($row = $resultado->fetch_array()){
-                    $nombreCliente = $row['cli_nombre'];
-                    $dirCliente = $row['cli_direccion'];
-                    $telCliente = $row['cli_telefono'];
-                    $emailCliente = $row['cli_email'];
-                    $idCliente = $row['cli_id'];
+                    $nombreProveedor = $row['prov_nom'];
+                    $dirProveedor = $row['prov_dir'];
+                    $telProveedor = $row['prov_tel'];
+                    $emailProveedor = $row['prov_email'];
+                    $idProveedor = $row['prov_id'];
                     
                     echo "
 
                     <div class='card-body text-center'>
                         <div class='mb-3'>
                             <div class='d-flex justify-content-between'>
-                                <button class='btn btn-sm btn-outline-none d-block mb-0'><img src='../../VIEWS/assets/imagenes/editar.png' style='width:20px;'></button>
+                                <button class='btn btn-sm btn-outline-none d-block mb-0'><img src='../../VIEWS/assets/imagenes/editar.png' style='width:20px;' data-bs-toggle='modal' data-bs-target='#editarProvModal'></button>
                                 <button class='btn btn-sm btn-outline-none d-block mb-0'><img src='../../VIEWS/assets/imagenes/basura.png' style='width:20px;'></button>
                             </div>
                         </div>
@@ -167,13 +167,13 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                             <img src='../../VIEWS/assets/imagenes/user-icon.png' alt='' class='rounded rounded-circle img-thumbnail' style='width:160px;'>
                         </div>
     
-                        <h6 class='text-secondary mb-4'>ID: <span class='p-2 bg-light border rounded text-dark ms-3'>$idCliente</span></h6>
-                        <h6 class='text-secondary mb-4'>Direccion: <span class='p-2 bg-light border rounded text-dark ms-3'>$dirCliente</span></h6>
-                        <h6 class='text-secondary mb-4'>Telefono: <span class='p-2 bg-light border rounded text-dark ms-3'>$telCliente</span></h6>
-                        <h6 class='text-secondary mb-4'>Email: <span class='p-2 bg-light border rounded text-dark ms-3'>$emailCliente</span></h6>
+                        <h6 class='text-secondary mb-4'>ID: <span class='p-2 bg-light border rounded text-dark ms-3'>$idProveedor</span></h6>
+                        <h6 class='text-secondary mb-4'>Direccion: <span class='p-2 bg-light border rounded text-dark ms-3'>$dirProveedor</span></h6>
+                        <h6 class='text-secondary mb-4'>Telefono: <span class='p-2 bg-light border rounded text-dark ms-3'>$telProveedor</span></h6>
+                        <h6 class='text-secondary mb-4'>Email: <span class='p-2 bg-light border rounded text-dark ms-3'>$emailProveedor</span></h6>
                     </div>
                     <div class='card footer bg-light text-center p-2'>
-                        <h3 class='text-success'>$nombreCliente</h3>
+                        <h3 class='text-success'>$nombreProveedor</h3>
                     </div>
                     ";
     
@@ -182,7 +182,7 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                 echo "Resultados no encontrados";
             }
 
-        }mostrarInfoCliente();
+        }mostrarInfoProveedor();
         break;
     }
 }

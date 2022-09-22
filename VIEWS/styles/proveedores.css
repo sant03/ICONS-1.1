@@ -1,0 +1,13 @@
+.nameProveedor:hover{
+    color: rgb(16, 124, 148);
+    cursor: pointer;
+}
+
+.prov-card{
+    border-radius: 50px 0 0 50px;
+    margin-left: 10px;
+}
+
+.prov-card:hover{
+    background-color: rgba(144, 215, 224, 0.722);
+}

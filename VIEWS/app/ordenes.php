@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="icon" href="../assets/imagenes/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="container-fluid">
 
@@ -149,56 +152,14 @@
         <!--User cards-->
         <div class="row mt-3">
             <div class="col-10 overflow-auto" style="height:550px ;">
-                <div class="row">
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
-                        <div class="card-body">
-                            <h6>Orden 0</h6>
-                            <h6>Fecha: <span>00/00/0000</span> </h6>
-                            <h6>Estado: <span class="text-info">Disponible</span> </h6>
-                            <img src="../assets/imagenes/order.png" alt="" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
-                        <div class="card-body">
-                            <h6>Orden 0</h6>
-                            <h6>Fecha: <span>00/00/0000</span> </h6>
-                            <h6>Estado: <span class="text-info">Disponible</span> </h6>
-                            <img src="../assets/imagenes/order.png" alt="" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
-                        <div class="card-body">
-                            <h6>Orden 0</h6>
-                            <h6>Fecha: <span>00/00/0000</span> </h6>
-                            <h6>Estado: <span class="text-info">Disponible</span> </h6>
-                            <img src="../assets/imagenes/order.png" alt="" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
-                        <div class="card-body">
-                            <h6>Orden 0</h6>
-                            <h6>Fecha: <span>00/00/0000</span> </h6>
-                            <h6>Estado: <span class="text-info">Disponible</span> </h6>
-                            <img src="../assets/imagenes/order.png" alt="" style="width:80px">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
-                        <div class="card-body">
-                            <h6>Orden 0</h6>
-                            <h6>Fecha: <span>00/00/0000</span> </h6>
-                            <h6>Estado: <span class="text-info">Disponible</span> </h6>
-                            <img src="../assets/imagenes/order.png" alt="" style="width:80px">
-                        </div>
-                    </div>
+                <div class="row" id="cont-ord-cards">
+                    
                 </div>
             </div>
         </div>
-        
-        
-        
-        
-       
     </section>
     
+    <!--Script-->
+    <script src="../../CONTROLLER/script/ordenes.js"></script>
 </body>
 </html>

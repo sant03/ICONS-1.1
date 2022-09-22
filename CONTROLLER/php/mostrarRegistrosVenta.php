@@ -49,7 +49,11 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                             <td>$cantidad</td>
                             <td>$ $total</td>
                             <td>$estado</td>
-                            <td><button class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt='' style='width:20px ;'></button></td>
+                            <td>
+                                <button class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'>
+                                    <img src='../../VIEWS/assets/imagenes/basura.png' alt='' style='width:20px ;'>
+                                </button>
+                            </td>
                         </tr>";
                     }
                 }else{

@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="icon" href="../assets/imagenes/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="container-fluid">
 
@@ -94,7 +97,7 @@
     <!--Main-->
     <section class="row mt-5 pt-5 ms-4 mb-4 overflow-hidden no-wrap">
         <div class="col d-flex justify-content-between mb-3">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#añadirPModal">
+            <button type="button" id="nuevoPedido" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#añadirPModal">
                 <img src="../assets/imagenes/add-icon.png" alt="" style="width:20px"> Nueva pedido
             </button>
             <!--Modal Registrar Pedido-->
@@ -107,7 +110,7 @@
                      <div>
                         <h4 class="modal-title">Nuevo registro, Pedido</h4>
                         <p>Rellene lo campos solicitados</p>
-                        <p class="fw-bold">ID pedido <span class="text-info">001</span> </p>
+                        <p class="fw-bold">ID pedido <span class="text-info" id="idPed">001</span> </p>
                      </div>
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
@@ -117,11 +120,12 @@
                       <form action="" class="d-flex justify-content-between">
                         <div style="width:48%">
                             <label for="" class="form-label fw-bold">Cliente</label>
-                            <input type="text" class="form-control mb-2">
+                            <input type="text" id="cliente" class="form-control mb-2 position-relative" autoComplete="off">
+                            <ul id="select-cli" class="list-group position-absolute"></ul>
                             <label for="" class="form-label fw-bold">Fecha</label>
-                            <input type="date" class="form-control mb-2">
+                            <input type="date" id="fecha" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Pedido</label>
-                            <input type="number" class="form-control mb-2">
+                            <input type="number" id="idPed2" class="form-control mb-2" disabled>
                             <label for="" class="form-label fw-bold">Estado de pago</label>
                             <select name="" id="" class="form-control mb-2">
                                 <option value="PAGADO">PAGADO</option>
@@ -132,57 +136,39 @@
                         </div>
                         <div style="width:48%">
                             <label for="" class="form-label fw-bold">Producto</label>
-                            <input type="text" class="form-control mb-2">
+                            <input type="text" id="producto" class="form-control mb-2 position-relative" autoComplete="off">
+                            <ul id="select-pro" class="list-group position-absolute"></ul>
+                            <label for="" class="form-label fw-bold">Precio</label>
+                            <input type="text" id="precio" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Cantidad</label>
                             <div class="d-flex">
-                                <input type="number" class="form-control mb-2">
-                                <button class="btn btn-sm btn-primary ms-4 align-self-center" style="width:120px;height:30px"><i class="bi bi-plus"></i> Añadir</button>
+                                <input type="number" id="cantidad" class="form-control mb-2">
+                                <button type="button" onclick="añadirProductoPed()" id="añadirAlPed" class="btn btn-sm btn-primary ms-4 align-self-center" style="width:120px;height:30px"><i class="bi bi-plus"></i> Añadir</button>
                             </div>
                             <div class="overflow-auto mb-3" style="height:120px">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" style="font-size: 13px;">
                                     <thead>
                                       <tr>
                                         <th>PRODUCTO</th>
+                                        <th>PRECIO</th>
                                         <th>CANTIDAD</th>
+                                        <th>TOTAL</th>
+                                        <th></th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        
-                                      </tr>
-                                      <tr>
-                                        <td>Mary</td>
-                                        <td>Moe</td>
-                                        
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                        
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                        
-                                      </tr>
-                                      <tr>
-                                        <td>July</td>
-                                        <td>Dooley</td>
-                                
-                                      </tr>
+                                    <tbody id="tablita" class="text-center">
+                                      
                                     </tbody>
                                   </table>
                             </div>
                             <label for="" class="form-label fw-bold">Total</label>
-                            <input type="number" class="form-control">
+                            <input type="number" id="totalPed" class="form-control" disabled>
                         </div>
                       </form>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success">Crear pedido</button>
+                      <button type="button" class="btn btn-success" onclick="registrarPedidos()">Crear pedido</button>
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                   </div>
@@ -195,32 +181,47 @@
                 <div class="p-3">
                     <h6>Ordenar por <i class="bi bi-sort-alpha-down ms-4"></i></h6>
                     <hr>
-                    <form action="" class="form-check">
+                    <form action="" class="form-check ms-0 ps-0">
                         <h6>Fecha <i class="bi bi-calendar-check ms-5"></i> </h6>
                         <hr>
-                        <label for="" class="form-check-label">Mas reciente primero</label>
-                        <input type="checkbox" class="form-check-input">
-                        <br>
-                        <label for="" class="form-check-label">Mas antiguos primero</label>
-                        <input type="checkbox" class="form-check-input">
+                        <div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="MRP" name="optradio" value="MRP">
+                                <label class="form-check-label" for="">Mas recientes primero</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="MAP" name="optradio" value="MAP" checked>
+                                <label class="form-check-label" for="">Mas antiguos primero</label>
+                            </div>
+                        </div>
                         <h6 class="mt-4">Orden alfabetico <i class="bi bi-sort-alpha-down ms-5"></i></h6>
                         <hr>
-                        <label for="" class="form-check-label">a-z</label>
-                        <input type="checkbox" class="form-check-input">
-                        <br>
-                        <label for="" class="form-check-label">z-a</label>
-                        <input type="checkbox" class="form-check-input">
+                        <div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="AZ" name="optradio" value="a-z" checked>
+                                <label class="form-check-label" for="">a-z</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="ZA" name="optradio" value="z-a" checked>
+                                <label class="form-check-label" for="">z-a</label>
+                            </div>
+                        </div>
                         <h6 class="mt-4">Cantidad <i class="bi bi-sort-numeric-down ms-5"></i> </h6>
                         <hr>
-                        <label for="" class="form-check-label">Mayor a menor</label>
-                        <input type="checkbox" class="form-check-input">
-                        <br>
-                        <label for="" class="form-check-label">Menor a mayor</label>
-                        <input type="checkbox" class="form-check-input">
+                        <div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="Mm" name="optradio" value="Mm" checked>
+                                <label class="form-check-label" for="">Mayor a menor</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input radios" id="mM" name="optradio" value="mM" checked>
+                                <label class="form-check-label" for="">Menor a mayor</label>
+                            </div>
+                        </div>
                     </form>
                     <div class="mt-3">
                         <button type="button" class="btn btn-sm btn-primary" style="width:90px ;">Cancelar</button>
-                        <button class="btn btn-sm btn-primary ms-3" style="width:90px ;">Aplicar</button>
+                        <button class="btn btn-sm btn-primary ms-3" id="ordenarPedidos" style="width:90px;">Aplicar</button>
                     </div>
                 </div>
             </ul>
@@ -232,17 +233,17 @@
                     <hr>
                     <form action="">
                         <label for="" class="form-label fw-bold">Fecha de venta</label>
-                        <input type="date" class="form-control mb-2">
+                        <input type="date" id="pedDate" class="form-control mb-2">
                         <label for="" class="form-label fw-bold">Cliente</label>
-                        <input type="text" class="form-control mb-2">
+                        <input type="text" id="pedCliente" class="form-control mb-2">
                         <label for="" class="form-label fw-bold">No Pedido</label>
-                        <input type="number" class="form-control mb-2">
+                        <input type="number" id="pedCode" class="form-control mb-2">
                         <label for="" class="form-label fw-bold">Producto</label>
-                        <input type="text" class="form-control">
+                        <input type="text" id="pedProducto" class="form-control">
                     </form>
                     <div class="mt-3">
                         <button type="button" class="btn btn-sm btn-primary" style="width:90px ;">Cancelar</button>
-                        <button class="btn btn-sm btn-primary ms-3" style="width:90px ;">Aplicar</button>
+                        <button class="btn btn-sm btn-primary ms-3" id="filtrarPedidos" style="width:90px ;">Aplicar</button>
                     </div>
                 </div>
             </ul>
@@ -251,11 +252,11 @@
         <hr>
         
         <h3>Todos</h3>
-        <!--User cards-->
+        <!--Pedidos cards-->
         <div class="row mt-3">
-            <div class="col-10 overflow-auto" style="height:550px ;">
-                <div class="row">
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
+            <div class="col-11 ms-5 overflow-auto" style="height:550px ;">
+                <div class="row" id="cont-ped-cards">
+                    <div class="col-lg-1 col-sm-5 card shadow text-center p-2 me-4 mb-3">
                         <div class="card-header">
                             <h6>Pedido 1</h6>
                             <img src="../assets/imagenes/box.png" alt="" style="width:80px">
@@ -265,7 +266,7 @@
                             <h6>Cliente: <span class="text-info">Nombre</span> </h6>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
+                    <div class="col-lg-1 col-sm-5 card shadow text-center p-2 me-4 mb-3">
                         <div class="card-header">
                             <h6>Pedido 1</h6>
                             <img src="../assets/imagenes/box.png" alt="" style="width:80px">
@@ -275,7 +276,7 @@
                             <h6>Cliente: <span class="text-info">Nombre</span> </h6>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-sm-5 card shadow text-center p-2 me-4 mb-3">
+                    <div class="col-lg-1 col-sm-5 card shadow text-center p-2 me-4 mb-3">
                         <div class="card-header">
                             <h6>Pedido 1</h6>
                             <img src="../assets/imagenes/box.png" alt="" style="width:80px">
@@ -328,12 +329,105 @@
                 </div>
             </div>
         </div>
-        
-        
-        
-        
-       
     </section>
+
+    <!--Script-->
+    <script src="../../CONTROLLER/script/pedidos.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            //Auto-Buscador Para el input clientes
+            $("#cliente").keyup(function(){
+                var query = $("#cliente").val();
+                if(query.length > 0 ){
+                    $.ajax({
+                        url: '../../CONTROLLER/php/autSearchCli.php',
+                        method: 'POST',
+                        data: {
+                            search: 1,
+                            q: query
+                        },
+                        success: function(data){
+                            $("#select-cli").html(data);
+                        },
+                        dataType: 'text'
+                    });
+                }
+            });
+            $(document).on("click", ".search_cli", function (){
+                var cliente = $(this).text();
+                $("#cliente").val(cliente);
+                $("#select-cli").html("");
+            });
+
+            //Auto-Buscador para el input productos
+            $("#producto").keyup(function(){
+                var query = $("#producto").val();
+                if(query.length > 0 ){
+                    $.ajax({
+                        url: '../../CONTROLLER/php/autSearchPro.php',
+                        method: 'POST',
+                        data: {
+                            search: 1,
+                            q: query
+                        },
+                        success: function(data, data1){
+                            $("#select-pro").html(data);
+                        },
+                        dataType: 'text'
+                    });
+                }
+            });
+            $(document).on("click", ".search_pro", function (){
+                var producto = $(this).text();
+                $("#producto").val(producto);
+                $("#select-pro").html("");
+                $("#precio").val(producto);
+            });
+        });
+
+        var AcomuladorTotales = new Array();
+        //Funcion para añadir productos a la pequeña tabla en el formulario de pedidos
+        function añadirProductoPed(){
+   
+            var producto = document.getElementById("producto").value;
+            var cantidad = document.getElementById("cantidad").value;
+            var precio = parseInt(document.getElementById("precio").value);
+            var total = cantidad * precio;
+
+            
+            
+            if(producto == "" || cantidad == 0 || precio == ""){
+                alert('Especifique un producto por favor');
+
+            }else{
+                var fila="<tr><td>"+producto+"</td><td class='itemPrecio'>"+precio+"</td><td class='itemCantidad'>"+cantidad+"</td><td class='totalPro'>"+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
+                $('#tablita').on('click', '#delete', function(e){
+                    $(this).closest('tr').remove();
+                    if($("#tablita tbody td").length < 0){
+                        $("#totalPed").val('');
+                    }
+                })
+
+                var btn = document.createElement("TR");
+                    btn.innerHTML=fila;
+                document.getElementById("tablita").appendChild(btn);
+                
+                $('#producto').val('');
+                $('#precio').val('');
+                $('#cantidad').val('');
+                
+            }
+
+            AcomuladorTotales.push(total);
+            AcomuladorTotales.forEach(function(element) {
+                total = total + element;
+            });
+
+            $('#totalPed').val(total);  
+        }
+
+    </script>
     
 </body>
 </html>

@@ -11,7 +11,11 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/proveedores.css">
     <link rel="icon" href="../assets/imagenes/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="container-fluid">
 
@@ -44,7 +48,7 @@
 
         <!--Header -->
         <div class="col-8 m-auto">
-            <h1><a href="clientes.html" class="text-decoration-none text-success">Clientes</a> | Proveedores</h1>
+            <h1><a href="clientes.php" class="text-decoration-none text-success">Clientes</a> | Proveedores</h1>
         </div>
         <div class="col-1">
             <img src="../assets/imagenes/image-11.svg" alt="" style="width:100px">
@@ -94,7 +98,7 @@
     <section class="row mt-5 pt-5 ms-4 mb-4 overflow-hidden no-wrap">
         <div class="row d-flex justify-content-between">
             <form action="" class="col-6 d-flex mb-3">
-                <input type="text" class="form-control me-2" placeholder="Buscar proveedores">
+                <input type="text" id="buscar" class="form-control me-2" placeholder="Buscar proveedores" autoComplete="off">
                 <button class="btn btn-primary">Buscar</button>
             </form>
             <div class="col-2">
@@ -115,18 +119,18 @@
                         <div class="modal-body">
                           <form action="">
                             <label for="" class="form-label fw-bold">Nombre </label>
-                            <input type="text" class="form-control mb-2">
+                            <input type="text" id="nombreProveedor" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Direccion </label>
-                            <input type="number" class="form-control mb-2">
+                            <input type="text" id="dirProveedor" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Telefono </label>
-                            <input type="number" class="form-control mb-2">
+                            <input type="number" id="telProveedor" class="form-control mb-2">
                             <label for="" class="form-label fw-bold">Email </label>
-                            <input type="number" class="form-control mb-2">
+                            <input type="email" id="emailProveedor" class="form-control mb-2">
                           </form>
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-success">Añadir proveedor</button>
+                          <button type="button" class="btn btn-success" id="añadirProveedor">Añadir proveedor</button>
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -139,18 +143,24 @@
                     <div class="p-3">
                         <h6>Ordenar por <i class="bi bi-sort-alpha-down ms-4"></i></h6>
                         <hr>
-                        <form action="" class="form-check">
-                            <label for="" class="form-check-label">a-z</label>
-                            <input type="checkbox" class="form-check-input">
-                            <br>
-                            <label for="" class="form-check-label">z-a</label>
-                            <input type="checkbox" class="form-check-input">
-                            <br>
-                            <div class="mt-3">
-                                <button type="button" class="btn btn-sm btn-primary" style="width:90px ;">Cancelar</button>
-                                <button class="btn btn-sm btn-primary ms-3" style="width:90px ;">Aplicar</button>
-                            </div> 
+                        <form action="" class="form-check ms-0 ps-0">
+                            <h6 class="mt-4">Orden alfabetico <i class="bi bi-sort-alpha-down ms-5"></i></h6>
+                            <hr>
+                            <div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input radios" id="AZ" name="optradio" value="a-z" checked>
+                                    <label class="form-check-label" for="">a-z</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input radios" id="ZA" name="optradio" value="z-a" checked>
+                                    <label class="form-check-label" for="">z-a</label>
+                                </div>
+                            </div>
                         </form>
+                        <div class="mt-3">
+                            <button type="button" class="btn btn-sm btn-primary" style="width:90px ;">Cancelar</button>
+                            <button class="btn btn-sm btn-primary ms-3" id="ordenarProveedores" style="width:90px;">Aplicar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,7 +173,7 @@
                 <div class="row">
                     <div class="col-11">
                         <h3>Todos</h3>
-                        <div class="row">
+                        <div class="row" id="cont-prov-cards">
                             <div class="col-lg-7 col-sm-5 card shadow text-center me-4 mb-3">
                                 <div class="card-body d-flex">
                                     <img src="../assets/imagenes/user-icon.png" alt="" style="width:60px">
@@ -201,62 +211,129 @@
             
             <!--Card Product-->
             <div class="col-3 m-auto text-center">
-                <div class="card shadow mb-3">
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <button class="btn btn-outline-none" data-bs-toggle="modal" data-bs-target="#editarCliModal"><img src="../assets/imagenes/editar.png" alt="" style="width: 30px;"></i></button>
-                            <div class="modal fade text-start" id="editarCliModal">
-                                <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                <div class="card shadow mb-3" id="cont-info-proveedor">
+                    
+                </div>
+
+                <div class="modal fade text-start" id="editarProvModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
                             
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                    <div>
-                                        <h4 class="modal-title">Editar informacion de proveedor</h4>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                            
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                    <form action="">
-                                        <label for="" class="form-label fw-bold">Nombre: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Direccion: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Telefono: </label>
-                                        <input type="number" class="form-control mb-2">
-                                        <label for="" class="form-label fw-bold">Email: </label>
-                                        <input type="number" class="form-control mb-2">
-                                    </form>
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-success">Guardar</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <div>
+                                    <h4 class="modal-title">Editar informacion de proveedor</h4>
                                 </div>
-                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <button class="btn btn-oultine-none"><img src="../assets/imagenes/basura.png" alt="" style="width:30px;"></button>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="">
+                                    <label for="" class="form-label fw-bold">Nombre: </label>
+                                    <input type="number" class="form-control mb-2">
+                                    <label for="" class="form-label fw-bold">Direccion: </label>
+                                    <input type="number" class="form-control mb-2">
+                                    <label for="" class="form-label fw-bold">Telefono: </label>
+                                    <input type="number" class="form-control mb-2">
+                                    <label for="" class="form-label fw-bold">Email: </label>
+                                    <input type="number" class="form-control mb-2">
+                                </form>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success">Guardar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
                         </div>
-                        
-                        <div class="mb-5">
-                            <img src="../assets/imagenes/user-icon.png" alt="" class="rounded rounded-circle img-thumbnail" style="width:160px;">
-                        </div>
-    
-                        <h6 class="text-secondary mb-4">ID: <span class="p-2 bg-light border rounded text-dark ms-3">1234578654</span></h6>
-                        <h6 class="text-secondary mb-4">Direccion: <span class="p-2 bg-light border rounded text-dark ms-3">Calle 83#25a 183</span></h6>
-                        <h6 class="text-secondary mb-4">Telefono: <span class="p-2 bg-light border rounded text-dark ms-3">3042617834</span></h6>
-                        <h6 class="text-secondary mb-4">Email: <span class="p-2 bg-light border rounded text-dark ms-3">nombre@gmail.com</span></h6>
-                    </div>
-                    <div class="card footer bg-light text-center p-2">
-                        <h3 class="text-success">Nombre</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!--Script-->
+    <script src="../../CONTROLLER/script/proveedores.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#buscar").keyup(function(){
+            var query = $("#buscar").val();
+                if(query.length > 0 ){
+                    $.ajax({
+                        url: '../../CONTROLLER/php/mostrarProveedores.php',
+                        method: 'POST',
+                        data: {
+                            function: 'autSearchProv',
+                            q: query
+                        },
+                        success: function(data){
+                            $("#cont-prov-cards").html(data);
+                        },
+                        dataType: 'text'
+                    });
+                }else if(query.length == 0){
+                    $.ajax({
+                        url: '../../CONTROLLER/php/mostrarProveedores.php',
+                        method: 'POST',
+                        data: {
+                            function: 'autSearchProvEmpty',
+                            q: query
+                        },
+                        success: function(data){
+                            $("#cont-prov-cards").html(data);
+                        },
+                        dataType: 'text'
+                    });
+                }
+            });
+
+            //Funcion añadir un cliente
+            $(document).on("click", "#añadirProveedor", function (){
+                var nuevoProveedor = [];
+                let nombreProveedor = document.getElementById("nombreProveedor").value;
+                let dirProveedor = document.getElementById("dirProveedor").value;
+                let telProveedor = document.getElementById("telProveedor").value;
+                let emailProveedor = document.getElementById("emailProveedor").value;
+
+                if(nombreProveedor == ""){
+                    alert('Por favor ingresa un nombre para el nuevo proveedor');
+                }else{
+                    nuevoProveedor.push(nombreProveedor,dirProveedor,parseInt(telProveedor),emailProveedor);
+                    
+                    var query = {'array': JSON.stringify(nuevoProveedor)};
+
+                    $.ajax({
+                        url: '../../CONTROLLER/php/añadirProveedor.php',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            q : query['array']
+                        },
+                        success: function(data){
+                            alert(data);
+                            location.reload();
+                        },
+                        dataType: 'text'
+                    });
+                }
+            });
+
+            $(document).on("click", ".nameProveedor", function (){
+                var query = $(this).text();
+                $.ajax({
+                    url: '../../CONTROLLER/php/mostrarProveedores.php',
+                    method: 'POST',
+                    data: {
+                        function: 'mostrarInfoProveedor',
+                        q : query
+                    },
+                    success: function(data){
+                        $("#cont-info-proveedor").html(data);
+                    },
+                    dataType: 'text'
+                });
+            }); 
+        });
+    </script>
 </body>
 </html>

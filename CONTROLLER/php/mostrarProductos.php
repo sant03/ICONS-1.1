@@ -133,6 +133,38 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
 
         }mostrarProductosFilterBy();
         break;
+        case 'mostrarProductosFilterBy2' : function mostrarProductosFilterBy2(){
+            include ('config.php');
+
+            $data = $_POST['q'];
+
+            $consulta = "SELECT c.nom_categoria, p.pro_estado, p.pro_referencia, p.pro_id, p.pro_cantidad FROM productos as p INNER JOIN categorias as c
+            ON p.pro_categoria = c.id_categoria WHERE c.nom_categoria = '$data'";
+
+            $resultado = mysqli_query($conex,$consulta);
+
+            if($resultado){
+                while($row = $resultado->fetch_array()){
+                    $cantidad = $row['pro_cantidad'];
+                    $producto = $row['pro_referencia'];
+                    echo "
+                    <div class='col-1'>
+                        <div class='card text-center mb-3 product-card'>
+                            <div class='card-body'>
+                                <p class='fw-bold mb-0 referencia'>$producto</p>
+                                <img src='../../VIEWS/assets/imagenes/producto-img-link.png' alt='' class='mb-2' style='width:35px'>
+                                <span class='d-block'>Quedan <span class='text-info fw-bold cantidad'>$cantidad </span></span>
+                            </div>
+                        </div>
+                    </div>";
+    
+                }
+            }else{
+                echo "Resultados no encontrados";
+            }
+
+        }mostrarProductosFilterBy2();
+        break;
         case 'mostrarInfoProducto' : function mostrarInfoProducto(){
             include('config.php');
 
@@ -187,6 +219,42 @@ if(isset($_POST['function']) && !empty($_POST['function'])) {
                 echo "Resultados no encontrados";
             }
         }mostrarInfoProducto();
+        break;
+        case 'consultarMinCompra' : function consultarMinCompra(){
+            include('config.php');
+
+            $product = $_POST['q'];
+
+            $consulta = "SELECT pro_min_compra FROM productos WHERE pro_referencia = '$product'";
+
+            $resultado = mysqli_query($conex,$consulta);
+            $rowMinCom = mysqli_fetch_array($resultado);
+    
+        if(mysqli_num_rows($resultado) > 0){
+            $minCompra = $rowMinCom['pro_min_compra'];
+            echo $minCompra;
+        }else{
+            echo "Resultados no encontrados";
+        }
+        }consultarMinCompra();
+        break;
+        case 'consultarPrecioCom' : function consultarPrecioCom(){
+            include('config.php');
+
+            $product = $_POST['q'];
+
+            $consulta = "SELECT pro_precio_compra FROM productos WHERE pro_referencia = '$product'";
+
+            $resultado = mysqli_query($conex,$consulta);
+            $rowPrecioCom = mysqli_fetch_array($resultado);
+    
+        if(mysqli_num_rows($resultado) > 0){
+            $precioCom = $rowPrecioCom['pro_precio_compra'];
+            echo $precioCom;
+        }else{
+            echo "Resultados no encontrados";
+        }
+        }consultarPrecioCom();
         break;
     }
 }

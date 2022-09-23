@@ -1,3 +1,12 @@
+<?php
+
+include("../../CONTROLLER/php/config.php");
+session_start();
+if(!isset($_SESSION['id_usuario'])){
+    header("Location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +21,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="icon" href="../assets/imagenes/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="container-fluid">
 
@@ -147,23 +159,22 @@
                     <h5>Seleccionar productos</h5>
                     <form action="" class="d-flex justify-content-between mb-3">
                         <div>
-                            <label for="" class="form-label ">Categoria</label>
-                            <select name="" id="" class="form-select">
-                                <option value="Bolsa libra">Bolsa libra</option>
-                                <option value="Bolsa kilo">Bolsa kilo</option>
+                            <label for="" class="form-label" >Categoria</label>
+                            <select name="" id="categoria" class="form-select" onchange="buscarProductos()">
+                                
                             </select>
                         </div>
                         <div>
                             <label for="" class="form-label">Codigo</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="codigo" class="form-control" onkeyup="buscarProductos()">
                         </div>
                         <div>
                             <label for="" class="form-label">Referencia</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="referencia" class="form-control" onkeyup="buscarProductos()">
                         </div>
                         <div>
                             <label for="" class="form-label">Estado</label>
-                            <select name="" id="" class="form-select">
+                            <select name="" id="estado" class="form-select" onchange="buscarProductos()">
                                 <option value="Stock">Stock</option>
                                 <option value="Por agotarse">Por agotarse</option>
                                 <option value="Por agotarse">Agotado</option>
@@ -173,48 +184,13 @@
                 </div>   
             </div>
             <!--Select Productos-->
-            <div class="row border overflow-auto bg-light p-3 me-3" style="height:160px;">
-                <div class="col-1">
-                    <div class="card text-center mb-3">
-                        <div class="card-body">
-                            <p class="fw-bold mb-0">Nombre</p>
-                            <img src="../assets/imagenes/producto-img-link.png" alt="" class="mb-2" style="width:35px">
-                            <span class="d-block">Quedan 7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1">
-                    <div class="card text-center mb-3">
-                        <div class="card-body">
-                            <p class="fw-bold mb-0">Nombre</p>
-                            <img src="../assets/imagenes/producto-img-link.png" alt="" class="mb-2" style="width:35px">
-                            <span class="d-block">Quedan 7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1">
-                    <div class="card text-center mb-3">
-                        <div class="card-body">
-                            <p class="fw-bold mb-0">Nombre</p>
-                            <img src="../assets/imagenes/producto-img-link.png" alt="" class="mb-2" style="width:35px">
-                            <span class="d-block">Quedan 7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1">
-                    <div class="card text-center mb-3">
-                        <div class="card-body">
-                            <p class="fw-bold mb-0">Nombre</p>
-                            <img src="../assets/imagenes/producto-img-link.png" alt="" class="mb-2" style="width:35px">
-                            <span class="d-block">Quedan 7</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="row border overflow-auto bg-light p-3 me-3" style="height:160px;" id="cont-pro-cards">
+
             </div>
             <hr>
             <div class="row mt-4">
                 <div class="col d-flex justify-content-between">
-                    <h5>Orden <span>001</span></h5>
+                    <h5>Orden <span id="idOrd"></span></h5>
                     <button class="btn btn-primary" data-bs-toggle="dropdown"><img src="../assets/imagenes/order-by.png" alt=""
                         style="width:20px"></button>
                     <ul class="dropdown-menu">
@@ -248,10 +224,10 @@
             </div>
             <div class="row">
                 <div class="col p-5">
-                    <table class="table table-striped table-hover text-center">
+                    <table class="table table-striped table-hover text-center" id="ord-table">
                         <thead>
                           <tr>
-                            <th>PRODUCO</th>
+                            <th>PRODUCTO</th>
                             <th>ORDENAR</th>
                             <th>PRECIO UNIDAD</th>
                             <th>TOTAL</th>
@@ -259,28 +235,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>2022-03-15</td>
-                            <td>1</td>
-                            <td>Angelly Potes</td>
-                            <td>1/2 Libra</td>
-                            <td><button class="btn btn-outline-none"><img src="../assets/imagenes/basura.png" alt="" style="width:20px ;"></button></td>
-                          </tr>
-                          <tr>
-                            <td>2022-03-15</td>
-                            <td>1</td>
-                            <td>Angelly Potes</td>
-                            <td>1/2 Libra</td>
-                            <td><button class="btn btn-outline-none"><img src="../assets/imagenes/basura.png" alt="" style="width:20px ;"></button></td>
-                          </tr>
+                          
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-between ps-4 pe-5">
-                    <h5>Total productos a adquirir: <span class="p-2 rounded text-white bg-primary fw-bold">34</span></h5>
-                    <h5>Total: <span class="p-2 rounded text-white bg-primary fw-bold">$ 0000</span></h5>
+                    <h5>Total productos a adquirir: <span class="p-2 rounded text-white bg-primary fw-bold" id="totalCant"></span></h5>
+                    <h5>Total: <span class="p-2 rounded text-white bg-primary fw-bold" id="totalOrd"></span></h5>
                 </div>
                 <div class="col-12 text-end mt-4">
                     <button class="btn btn-lg btn-primary">Cancelar</button>
@@ -288,8 +251,79 @@
                 </div>
             </div>
         </div>
-        
     </section>
     
+    <script src="../../CONTROLLER/script/crearOrden.js"></script>
+    <script>
+        var AcomuladorTotales = new Array();
+        var AcomuladorCantidades = new Array();
+        $(document).on("click", ".product-card", function (){
+            let cantidad = $(this).find('.cantidad').text();
+            let referencia = $(this).find('.referencia').text();
+            var minCompra;
+            var precio;
+            let query = referencia;
+            
+            $.ajax({
+                url: '../../CONTROLLER/php/mostrarProductos.php',
+                async: false,
+                method: 'POST',
+                data: {
+                    function: 'consultarMinCompra',
+                    q : query
+                },
+                success: function(data){
+                    minCompra = data;
+                    
+                },
+                dataType: 'text'
+            });
+
+            $.ajax({
+                url: '../../CONTROLLER/php/mostrarProductos.php',
+                async: false,
+                method: 'POST',
+                data: {
+                    function: 'consultarPrecioCom',
+                    q : query
+                },
+                success: function(data){
+                    precio = data;
+                    
+                },
+                dataType: 'text'
+            });
+
+            let ordenar = parseInt(minCompra) - cantidad;
+            if(Math.sign(ordenar) == -1){
+                ordenar = 0;
+            }
+
+            let total = cantidad * precio
+            
+            var fila="<tr><td>"+referencia+"</td><td>"+ordenar+"</td><td>$ "+precio+"</td><td>$ "+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
+            $('#ord-table').on('click', '#delete', function(e){
+                $(this).closest('tr').remove();
+            })
+
+            var btn = document.createElement("TR");
+                btn.innerHTML=fila;
+            document.getElementById("ord-table").appendChild(btn);
+
+            AcomuladorTotales.push(total);
+            AcomuladorTotales.forEach(function(element) {
+                total = total + element;
+            });
+
+            $('#totalOrd').text("$ "+total);
+
+            AcomuladorCantidades.push(ordenar);
+            AcomuladorCantidades.forEach(function(element) {
+                ordenar = ordenar + element;
+            });
+
+            $('#totalCant').text(ordenar);
+        });
+    </script>
 </body>
 </html>

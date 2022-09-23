@@ -1,3 +1,4 @@
+
 $(document).ready(function mostrarOrdenes(){
     $.ajax({
         url: '../../CONTROLLER/php/mostrarOrdenes.php',
@@ -10,4 +11,4 @@ $(document).ready(function mostrarOrdenes(){
         },
         dataType: 'text'
     });
-});    
+});

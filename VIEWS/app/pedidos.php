@@ -1,3 +1,12 @@
+<?php
+
+include("../../CONTROLLER/php/config.php");
+session_start();
+if(!isset($_SESSION['id_usuario'])){
+    header("Location: login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -404,9 +413,6 @@
                 var fila="<tr><td>"+producto+"</td><td class='itemPrecio'>"+precio+"</td><td class='itemCantidad'>"+cantidad+"</td><td class='totalPro'>"+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
                 $('#tablita').on('click', '#delete', function(e){
                     $(this).closest('tr').remove();
-                    if($("#tablita tbody td").length < 0){
-                        $("#totalPed").val('');
-                    }
                 })
 
                 var btn = document.createElement("TR");

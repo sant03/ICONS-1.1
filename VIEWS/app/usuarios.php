@@ -173,7 +173,7 @@ if(!isset($_SESSION['id_usuario'])){
                         url: '../../CONTROLLER/php/autSearchUser.php',
                         method: 'POST',
                         data: {
-                            search: 1,
+                            function : 'autoSearchUser',
                             q: query
                         },
                         success: function(data){

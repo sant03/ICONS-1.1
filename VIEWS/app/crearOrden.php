@@ -113,30 +113,32 @@ if(!isset($_SESSION['id_usuario'])){
                     <form action="" class="d-flex justify-content-between mb-3">
                         <div>
                             <label for="" class="form-label ">No orden</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="idOrd2" disabled class="form-control">
                         </div>
                         <div>
                             <label for="" class="form-label">Estado</label>
-                            <select name="" id="" class="form-select">
+                            <select name="" id="estadoOrd" class="form-select">
                                 <option value="Disponible">Disponible</option>
                                 <option value="Usada">Usada</option>
                             </select>
                         </div>
                         <div>
                             <label for="" class="form-label">Fecha elaboracion</label>
-                            <input type="date" name="" id="" class="form-control">
+                            <input type="date" name="" id="fechaOrd" class="form-control">
                         </div>
                         <div>
                             <label for="" class="form-label">Proveedor</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="proveedor" class="form-control" autoComplete="off">
+                            <ul id="select-prov" class="list-group position-absolute"></ul>
                         </div>
                         <div>
                             <label for="" class="form-label">Elaborada por</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="buscarUsu" class="form-control" autoComplete="off">
+                            <ul id="select-usu" class="list-group position-absolute"></ul>
                         </div>
                         <div>
                             <label for="" class="form-label">Area</label>
-                            <input type="text" name="" id="" class="form-control">
+                            <input type="text" name="" id="" class="form-control" disabled>
                         </div>
                         <div>
                             <label for="" class="form-label">Forma de pago</label>
@@ -147,7 +149,7 @@ if(!isset($_SESSION['id_usuario'])){
                         </div>
                         <div>
                             <label for="" class="form-label">Fecha recepcion</label>
-                            <input type="date" name="" id="" class="form-control">
+                            <input type="date" name="" id="" class="form-control" disabled>
                         </div>
                     </form>
                 </div>
@@ -166,15 +168,15 @@ if(!isset($_SESSION['id_usuario'])){
                         </div>
                         <div>
                             <label for="" class="form-label">Codigo</label>
-                            <input type="text" name="" id="codigo" class="form-control" onkeyup="buscarProductos()">
+                            <input type="text" name="" id="codigo" class="form-control" disabled onkeyup="buscarProductos()">
                         </div>
                         <div>
                             <label for="" class="form-label">Referencia</label>
-                            <input type="text" name="" id="referencia" class="form-control" onkeyup="buscarProductos()">
+                            <input type="text" name="" id="referencia" class="form-control" disabled onkeyup="buscarProductos()">
                         </div>
                         <div>
                             <label for="" class="form-label">Estado</label>
-                            <select name="" id="estado" class="form-select" onchange="buscarProductos()">
+                            <select name="" id="estado" class="form-select" disabled onchange="buscarProductos()">
                                 <option value="Stock">Stock</option>
                                 <option value="Por agotarse">Por agotarse</option>
                                 <option value="Por agotarse">Agotado</option>
@@ -242,12 +244,12 @@ if(!isset($_SESSION['id_usuario'])){
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-between ps-4 pe-5">
-                    <h5>Total productos a adquirir: <span class="p-2 rounded text-white bg-primary fw-bold" id="totalCant"></span></h5>
-                    <h5>Total: <span class="p-2 rounded text-white bg-primary fw-bold" id="totalOrd"></span></h5>
+                    <h5>Total productos a adquirir: <span class="p-2 rounded text-white bg-primary fw-bold ms-2" id="totalCant"></span></h5>
+                    <h5>Total: $<span class="p-2 rounded text-white bg-primary fw-bold ms-2" id="totalOrd"></span></h5>
                 </div>
-                <div class="col-12 text-end mt-4">
+                <div class="col-12 text-end mt-4 mb-4">
                     <button class="btn btn-lg btn-primary">Cancelar</button>
-                    <button class="btn btn-lg btn-primary">Guardar Orden</button>
+                    <button class="btn btn-lg btn-primary" onclick="crearOrden()">Guardar Orden</button>
                 </div>
             </div>
         </div>
@@ -255,15 +257,20 @@ if(!isset($_SESSION['id_usuario'])){
     
     <script src="../../CONTROLLER/script/crearOrden.js"></script>
     <script>
+
+        //Arrays donde se almacenan los totales y cantidad por producto a adquirir 
         var AcomuladorTotales = new Array();
         var AcomuladorCantidades = new Array();
+
+        //Funcion al hacer click en el producto se debe añadir a la tabla de orden de compra
         $(document).on("click", ".product-card", function (){
             let cantidad = $(this).find('.cantidad').text();
             let referencia = $(this).find('.referencia').text();
             var minCompra;
             var precio;
             let query = referencia;
-            
+
+            //Consultar el minimo de compra por producto para calcular la cantidad a solicitar
             $.ajax({
                 url: '../../CONTROLLER/php/mostrarProductos.php',
                 async: false,
@@ -279,6 +286,7 @@ if(!isset($_SESSION['id_usuario'])){
                 dataType: 'text'
             });
 
+            //Consultar el precio de compra de cada producto para calcular el total por producto
             $.ajax({
                 url: '../../CONTROLLER/php/mostrarProductos.php',
                 async: false,
@@ -294,14 +302,17 @@ if(!isset($_SESSION['id_usuario'])){
                 dataType: 'text'
             });
 
-            let ordenar = parseInt(minCompra) - cantidad;
+            //Se calcula la cantidad a ordenar dependiendo del minimo de compra
+            let ordenar = parseInt(minCompra) - parseInt(cantidad);
             if(Math.sign(ordenar) == -1){
                 ordenar = 0;
             }
 
-            let total = cantidad * precio
+            //Se calcula el total por producto
+            let total = ordenar * parseInt(precio);
             
-            var fila="<tr><td>"+referencia+"</td><td>"+ordenar+"</td><td>$ "+precio+"</td><td>$ "+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
+            //Se añade el producto y los respectivos datos a la orden de compra
+            var fila="<tr><td>"+referencia+"</td><td>"+ordenar+"</td><td>$ "+precio+"</td><td>"+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
             $('#ord-table').on('click', '#delete', function(e){
                 $(this).closest('tr').remove();
             })
@@ -310,19 +321,22 @@ if(!isset($_SESSION['id_usuario'])){
                 btn.innerHTML=fila;
             document.getElementById("ord-table").appendChild(btn);
 
+            //Por cada vez que se calcule un total por producto se añade al arreglo de totales de producto
             AcomuladorTotales.push(total);
-            AcomuladorTotales.forEach(function(element) {
-                total = total + element;
-            });
+            var totalOrd=0;
 
-            $('#totalOrd').text("$ "+total);
+            //Calcular el total final de la orden
+            for(let i of AcomuladorTotales) totalOrd+=i; 
+            $('#totalOrd').text(+totalOrd);
 
+            //Por cada vez que se calcule una cantidad por producto se añade al arreglo de cantidad de producto
             AcomuladorCantidades.push(ordenar);
-            AcomuladorCantidades.forEach(function(element) {
-                ordenar = ordenar + element;
-            });
 
-            $('#totalCant').text(ordenar);
+            //Calcular el total de productos a adquirir
+            var totalPro=0;
+            for(let i of AcomuladorCantidades) totalPro+=i;
+
+            $('#totalCant').text(totalPro);
         });
     </script>
 </body>

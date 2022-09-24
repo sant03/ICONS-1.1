@@ -115,7 +115,65 @@ $row = $resultado->fetch_assoc();
     <section class="row mt-5 pt-5 ms-4 mb-4 overflow-auto" style="height:740px">
         <div class="row">
             <div class="col text-end">
-                <button class="btn btn-outline-info mb-3"><i class="bi bi-pencil-square me-2"></i>Editar informacion de usuario</button>
+                <button class="btn btn-outline-info mb-3"><i class="bi bi-pencil-square me-2" data-bs-toggle="modal" data-bs-target="#editarMiInfo"></i>Editar informacion de usuario</button>
+            </div>
+            <div class="modal fade" id="editarMiInfo">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                      
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <div>
+                            <h4 class="modal-title">Nuevo registro, Ventas</h4>
+                            <p>Rellene lo campos solicitados</p>
+                            <p class="fw-bold">ID venta <span class="text-info" id="idVen">001</span> </p>
+                        </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                        
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="" method="POST" class="d-flex justify-content-between">
+                            <div style="width:48%">
+                                <label for="cliente" class="form-label fw-bold">Cliente</label>
+                                <input type="text" id="cliente" name="cliente" class="form-control mb-2 position-relative" autoComplete="off">
+                                <ul id="select-cli" class="list-group position-absolute"></ul>
+                                <label for="fecha" class="form-label fw-bold">Fecha</label>
+                                <input type="date" id="fecha" name="fecha" class="form-control mb-2">
+                                <label for="estado" class="form-label fw-bold">Estado de pago</label>
+                                <select name="estado" id="estado" onchange="calcularDeuda()" class="form-select mb-2">
+                                    <option value="PAGADO">PAGADO</option>
+                                    <option value="DEBE">DEBE</option>
+                                </select>
+                                <div class="align-items-center" id="formDebe" style="display:none">
+                                    <label for="" class="form-label me-2">Pagó</label>
+                                    <input type="number" id="pago" class="form-control me-2">
+                                    <label for="" class="form-label me-2">Debe</label>
+                                    <input type="number" id="debe" class="form-control">
+                                </div>
+                                    <label for="coment" class="form-label fw-bold">Comentario</label>
+                                    <textarea name="coment" id="coment" cols="3" rows="3" class="form-control"></textarea>
+                                </div>
+                                <div style="width:48%">
+                                    <label for="producto" class="form-label fw-bold">Producto</label>
+                                    <input type="text" id="producto" name="producto" class="form-control mb-2 postition-relative" autoComplete="off">
+                                    <ul id="select-pro" class="list-group position-absolute"></ul>
+                                    <label for="cantidad"  class="form-label fw-bold">Cantidad</label>
+                                    <input type="number" id="cantidad" name="cantidad" onblur="calcularTotal()" class="form-control mb-2">
+                                    <label for="precio" class="form-label fw-bold">Precio unidad</label>
+                                    <input type="text" id="precio" name="precio" class="form-control mb-2" autoComplete="off">
+                                    <label for="" name="total" class="form-label fw-bold">Total</label>
+                                    <input type="number" id="total" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" name="registrarV" class="btn btn-success" onclick="registrarVenta()">Registrar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

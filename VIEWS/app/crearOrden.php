@@ -113,7 +113,7 @@ if(!isset($_SESSION['id_usuario'])){
                     <form action="" class="d-flex justify-content-between mb-3">
                         <div>
                             <label for="" class="form-label ">No orden</label>
-                            <input type="text" name="" id="idOrd2" disabled class="form-control">
+                            <input type="text" name="" id="idOrd2" class="form-control">
                         </div>
                         <div>
                             <label for="" class="form-label">Estado</label>
@@ -255,7 +255,7 @@ if(!isset($_SESSION['id_usuario'])){
         </div>
     </section>
     
-    <script src="../../CONTROLLER/script/crearOrden.js"></script>
+    <script src="../../CONTROLLER/script/CrearOrden.js"></script>
     <script>
 
         //Arrays donde se almacenan los totales y cantidad por producto a adquirir 

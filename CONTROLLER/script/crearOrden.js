@@ -90,6 +90,7 @@ function buscarProductos(){
 function crearOrden(){
 
     var ordenCompra = [];
+    let numOrd = document.getElementById("idOrd2").value;
     let estadoOrd = document.getElementById("estadoOrd").value;
     let fechaOrd = document.getElementById("fechaOrd").value;
     let proveedor = document.getElementById("proveedor").value;
@@ -112,23 +113,25 @@ function crearOrden(){
     if(productosOrden.length === 1){
         alert('Por favor añada productos a la orden');
     }else{
-        /*ordenCompra.push(estadoOrd,fechaOrd,proveedor,parseInt(totalCant),parseInt(totalOrd),productosOrden);
+        ordenCompra.push(estadoOrd,fechaOrd,proveedor,parseInt(totalCant),parseInt(totalOrd),numOrd);
 
         var query = {'array': JSON.stringify(ordenCompra)};
+        var query2 = {'array2': JSON.stringify(productosOrden)};
 
         $.ajax({
             url: '../../CONTROLLER/php/registrarOrden.php',
             method: 'POST',
             dataType: 'json',
             data: {
-                q : query['array']
+                q : query['array'],
+                q2 : query2['array2']
             },
-            success: function(){
-                alert("Nueva orden creada exitosamente");
+            success: function(data){
+                console.log(data);
             },
             dataType: 'text'
-        });*/
-        alert("Nueva orden creada exitosamente");
-        window.location = '../../VIEWS/app/ordenes.php'
+        })
+        /*alert("Nueva orden creada exitosamente");
+        window.location = '../../VIEWS/app/ordenes.php'*/
     }
 }

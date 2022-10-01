@@ -27,7 +27,6 @@ while($data = $resultado->fetch_array()){
     $cargo = $data['car_tipo'];
     echo "
     <div>
-        <h4 class='mb-4'>Contraseña: <span class'text-secondary'>************</span></h4>
         <h4 class='mb-4'>Nombre: <span class='text-secondary'>$nombre $apellido</span> </h4>
         <h4 class='mb-4'>Fecha de Nacimiento: <span class='text-secondary'>$birthDate</span> </h4>
         <h4 class='mb-4'>Edad: <span class='text-secondary'>$age</span></h4>

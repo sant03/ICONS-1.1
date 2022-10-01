@@ -40,7 +40,7 @@ $row = $resultado->fetch_assoc();
           <a href="home.php" class="text-decoration-none text-secondary fw-bold d-block p-3"><i class="bi bi-house-door-fill me-3"></i>Home</a>
           <a href="usuarios.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-people-fill me-3"></i>Usuarios</a>
           <a href="ventas.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-receipt me-3"></i>Ventas</a>
-          <a href="compras.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-cart-fill me-3"></i>Compras</a>
+          <a href="productos.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-tag-fill me-3"></i>Productos</a><a href="compras.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-cart-fill me-3"></i>Compras</a>
           <a href="clientes.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-person-check-fill me-3"></i>Clientes y Proveedores</a>
           <a href="ordenes.php" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-receipt-cutoff me-3"></i></i>Orden Compra</a>
           <a href="#" class="text-decoration-none text-secondary fw-bold d-block p-3 "><i class="bi bi-gear-fill me-3"></i>Ajustes</a>
@@ -115,7 +115,7 @@ $row = $resultado->fetch_assoc();
     <section class="row mt-5 pt-5 ms-4 mb-4 overflow-auto" style="height:740px">
         <div class="row">
             <div class="col text-end">
-                <button class="btn btn-outline-info mb-3"><i class="bi bi-pencil-square me-2" data-bs-toggle="modal" data-bs-target="#editarMiInfo"></i>Editar informacion de usuario</button>
+                <button class="btn btn-outline-info mb-3" data-bs-toggle="modal" data-bs-target="#editarMiInfo"><i class="bi bi-pencil-square me-2"></i>Editar informacion de usuario</button>
             </div>
             <div class="modal fade" id="editarMiInfo">
                 <div class="modal-dialog modal-lg modal-dialog-centered">

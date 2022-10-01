@@ -37,6 +37,7 @@ $(document).ready(function mostrarRegistrosCompras(){
                 },
                 dataType: 'text'
             });  
+
         //Registros ordenados del Mas antiguo al mas reciente
         } else if($("#MAP").is(':checked')) {  
             $.ajax({
@@ -142,6 +143,8 @@ $(document).ready(function mostrarRegistrosCompras(){
     
 })
 
+
+//Consultar Id de compras 
 $(document).on("click", "#nuevaCompra", function (){
     $.ajax({
         url: '../../CONTROLLER/php/consultarIdCompra.php',
@@ -154,6 +157,7 @@ $(document).on("click", "#nuevaCompra", function (){
     });
 });
 
+//Imlementacion del registro de compras
 function registrarCompra(){
 
     var registroCompra = [];
@@ -165,26 +169,28 @@ function registrarCompra(){
     let numCom = document.getElementById("numCom").value;
     let comentario = document.getElementById("coment").value;
 
+    //Validacion del formulario
     if(proveedor == "" || producto == "" || cantidad == "" || fecha == ""){
         alert('Por favor ingrese los datos de la compra');
     }else{
+
+        //Añadir los productos al arreglo que contiene los datos del registro
         registroCompra.push(proveedor,producto,parseInt(cantidad),fecha,parseInt(numCom),comentario,parseInt(total));
         
+        //Solicitud a la base de datos
         var query = {'array': JSON.stringify(registroCompra)};
 
-            $.ajax({
-                url: '../../CONTROLLER/php/registrarCompra.php',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    q : query['array']
-                },
-                success: function(data){
-                    alert(data);
-                },
-                dataType: 'text'
-            });
-    }
-    
-    
+        $.ajax({
+            url: '../../CONTROLLER/php/registrarCompra.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                q : query['array']
+            },
+            success: function(data){
+                alert(data);
+            },
+            dataType: 'text'
+        });
+    }    
 }

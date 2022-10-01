@@ -91,7 +91,7 @@ if(!isset($_SESSION['id_usuario'])){
                     <li class="dropdown-item">
                         <h6><i class="bi bi-question-circle-fill"></i> Ayuda</h6>
                     </li>
-                    <li class="dropdown-item">
+                    <li class="dropdown-item" onclick="<?php include ('../../CONTROLLER/php/logout.php') ?>">
                         <h6><i class="bi bi-box-arrow-right"></i> Salir</h6>
                     </li>
                 </ul>
@@ -426,11 +426,11 @@ if(!isset($_SESSION['id_usuario'])){
             }
 
             AcomuladorTotales.push(total);
-            AcomuladorTotales.forEach(function(element) {
-                total = total + element;
-            });
+            var totalPed=0;
 
-            $('#totalPed').val(total);  
+            //Calcular el total final del pedido
+            for(let i of AcomuladorTotales) totalPed+=i; 
+            $('#totalPed').val(+totalPed);
         }
 
     </script>

@@ -110,7 +110,7 @@ $(document).ready(function mostrarRegistrosVentas(){
         }  
     });
 
-    //Mostrar registros de ventas segun parametros
+    //Filtrar registros de ventas segun parametros
     $(document).on("click", "#filtrarVenta", function (){
         let saleDate = $("#saleDate").val();
         let product = $("#product").val();
@@ -118,7 +118,7 @@ $(document).ready(function mostrarRegistrosVentas(){
         let statePay = $("#statePay").val();
         let saleCode = $("#saleCode").val();
 
-        if(saleDate == '' && product == '' && cliente == '' && statePay == 'NINGUNO' && saleCode == ''){
+        if(saleDate == "" && product == "" && cliente == "" && statePay == 'NINGUNO' && saleCode == ""){
             alert('Ningun filtro aplicado');
             location.reload();
         } else{

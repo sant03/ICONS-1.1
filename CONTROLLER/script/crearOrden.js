@@ -8,6 +8,7 @@ $(document).ready(function selecionarCategoria(){
         dataType: 'text'
     });
 
+    //Auto buscador proveedores en formulario
     $("#proveedor").keyup(function(){
         var query = $("#proveedor").val();
         if(query.length > 0 ){

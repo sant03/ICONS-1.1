@@ -11,6 +11,7 @@ $(document).ready(function mostrarClientes(){
         dataType: 'text'
     });
 
+    //Funcion Ordenar Clientes
     $(document).on("click", "#ordenarClientes", function (){
         //Registros ordenados del Mas reciente al mas antiguo
         if($("#AZ").is(':checked')) {  
@@ -40,23 +41,6 @@ $(document).ready(function mostrarClientes(){
             });
         }
     });
-
-    $(document).on("click", ".nameCliente", function (){
-        var query = $(this).text();
-        $.ajax({
-            url: '../../CONTROLLER/php/mostrarProductos.php',
-            method: 'POST',
-            data: {
-                function: 'mostrarInfoProducto',
-                q : query
-            },
-            success: function(data){
-                $("#cont-info-producto").html(data);
-            },
-            dataType: 'text'
-        });
-        
-    }); 
 
 });
 

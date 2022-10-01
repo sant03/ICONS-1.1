@@ -58,11 +58,11 @@ var_dump($productos);
                         if($resultado3){
                             $validado = $validarInsersion + 1;
                         }else{
-                            $validarInsersion = 0;
+                            $validado = $validarInsersion;
                         }
                     }  
                 }
-                if($validarInsersion = 0){
+                if($validado = 0){
                     echo "Fallo al registrar los productos, intentelo nuevamente";
                 }elseif($validado = 2){
                     echo "Nueva orden de compra registrada exitosamente";

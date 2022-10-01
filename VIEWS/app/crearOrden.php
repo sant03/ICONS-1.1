@@ -313,9 +313,6 @@ if(!isset($_SESSION['id_usuario'])){
             
             //Se añade el producto y los respectivos datos a la orden de compra
             var fila="<tr><td>"+referencia+"</td><td>"+ordenar+"</td><td>$ "+precio+"</td><td>"+total+"</td><td><button type='button' id='delete' class='btn btn-outline-none' data-bs-toggle='modal' data-bs-target='#deleteRecordModal'><img src='../../VIEWS/assets/imagenes/basura.png' alt=''style='width:18px;'></button></td></tr>";
-            $('#ord-table').on('click', '#delete', function(e){
-                $(this).closest('tr').remove();
-            })
 
             var btn = document.createElement("TR");
                 btn.innerHTML=fila;
@@ -337,6 +334,13 @@ if(!isset($_SESSION['id_usuario'])){
             for(let i of AcomuladorCantidades) totalPro+=i;
 
             $('#totalCant').text(totalPro);
+
+            $('#ord-table').on('click', '#delete', function(e){
+                $(this).closest('tr').remove();
+                if($(this).closest('tr').remove()){
+                    AcomuladorTotales.splice()
+                }
+            })
         });
     </script>
 </body>

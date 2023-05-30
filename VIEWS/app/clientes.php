@@ -231,7 +231,7 @@ if(!isset($_SESSION['id_usuario'])){
     <script src="../../CONTROLLER/script/clientes.js"></script>
     <script>
         $(document).ready(function(){
-            $("#buscar").keyup(function(){
+            $("#buscar").keyup(function buscarClientes(){
             var query = $("#buscar").val();
                 if(query.length > 0 ){
                     $.ajax({

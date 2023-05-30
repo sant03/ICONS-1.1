@@ -27,7 +27,7 @@
                 <button type="submit" class="btn btn-primary mt-3">Enviar codigo</button>
             </form>
 
-            <p class="text-center">Volver al <a href="login.html" class="text-decoration-none">Inicio de sesion</a></p>
+            <p class="text-center">Volver al <a href="login.php" class="text-decoration-none">Inicio de sesion</a></p>
         </div>
         <div class="col text-end">
             <img src="../assets/imagenes/main-image.png" alt="" class="m-2 rounded" style="width:500px">

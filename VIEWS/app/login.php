@@ -19,12 +19,12 @@
             <h2 class="ms-3"><a href="index.php"><i class="bi bi-arrow-left-circle"></i></a></h2>
             <h1 class="fw-bold text-center">INICIAR SESION</h1>
             <p class="text-black text-center">Inicie sesion para continuar</p>
-            <form action="../../CONTROLLER/php/login.php" method="POST" class="m-5 p-4" name="login_form">
+            <form action="" method="POST" class="m-5 p-4" name="login_form" id="login_form">
                 <label for="user" class="form-label">Usuario</label>
                 <input type="text" name="user" id="user" class="form-control mb-2" placeholder="Ingrese su usuario">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Ingrese su contraseña">
-                <button type="submit" onclick="validateForm()" name="login" class="btn btn-primary mt-3">Login</button>
+                <button type="submit" onclick="validateForm(user, password)" name="login" class="btn btn-primary mt-3">Login</button>
             </form>
             <p class="text-center"><a href="reset-password.php" class="text-decoration-none">¿Olvidó su Contraseña?</a></p>
             <p class="text-center">¿No tiene una cuenta? <a href="sign-up.php" class="text-decoration-none">Regístrese</a></p>
@@ -35,6 +35,10 @@
     </div>
 
     <!--Script -->
-    <script src="../../CONTROLLER/script/login.js"></script>
+    <script src="../../CONTROLLER/script/__Login.js"></script>
+    <script>
+        let user = document.getElementById("user");
+        let password = document.getElementById("password");
+    </script>
 </body>
 </html>

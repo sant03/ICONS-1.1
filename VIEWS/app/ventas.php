@@ -328,7 +328,7 @@ if(!isset($_SESSION['id_usuario'])){
         </div> 
     </section>
 
-    <script src="../../CONTROLLER/script/ventas.js"></script>
+    <script src="../../CONTROLLER/script/Ventas.js"></script>
     <script>
         $(document).ready(function(){
 

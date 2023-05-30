@@ -1,4 +1,4 @@
-function Person (fname, lname, age, gender , interests){
+export function Person (fname, lname, age, gender , interests){
     this.name = {
         'fname': fname,
         'lname': lname
@@ -27,9 +27,13 @@ function Person (fname, lname, age, gender , interests){
     }
 }
 
+
+
 let person1 = new Person ('Salva', 'Jayes', 25, 'Female' ,['skydiving', 'surf', 'eat' , 'read Books']);
 person1.name;
 person1.greeting();
+
+
 
 let person2 = new Person ('Santiago', 'Potes', 19, 'Male', ['Take photos', 'programming']);
 person2.name;

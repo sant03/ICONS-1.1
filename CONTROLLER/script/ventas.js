@@ -1,7 +1,7 @@
 
 //Calcular total venta en formulario de registro
 
-export function calcularTotal(){
+function calcularTotal(){
     var cantidad = document.getElementById("cantidad").value;
     var precioPro = document.getElementById("precio").value;
     var operacion = cantidad * precioPro
@@ -188,7 +188,5 @@ function registrarVenta(){
                 },
                 dataType: 'text'
             });
-    }
-    
-    
+    } 
 }
